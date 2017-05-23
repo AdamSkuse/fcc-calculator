@@ -1,0 +1,32 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "### Objective Build a simple calculator using Javascript https://www.freecodecamp.com/challenges/build-a-javascript-calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamSkuse/fcc-calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdamSkuse/fcc-calculator/issues"
+  },
+  "homepage": "https://github.com/AdamSkuse/fcc-calculator#readme",
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "browser-sync": "^2.18.12",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^7.0.0",
+    "gulp-watch": "^4.3.11",
+    "postcss-import": "^10.0.0",
+    "postcss-nested": "^2.0.2",
+    "postcss-simple-vars": "^4.0.0"
+  }
+}
