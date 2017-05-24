@@ -2,7 +2,7 @@ var buffer = []
 
 $('.button').on('click', function(){
   var input = ($(this).attr('data-key'));
-    if (/[0-9]/.test(input)) {
+    if (/[0-9\.]/.test(input)) {
     numberHandler(input); 
   } else if (/[/\+\*-]/.test(input)) {
     operatorHandler(input);
@@ -10,22 +10,13 @@ $('.button').on('click', function(){
     equalsHandler();
   } else if (/(AC|C)/.test(input)) {
     functionHandler();
-  } else {
-    decimalHandler(input);
-  }
+  } 
 });
 
 function numberHandler(digit) {
   // deals with numbers being input
   console.log('digit: ' + digit);
   buffer.push(digit);
-  console.log('buffer: ' + buffer)
-}
-
-function decimalHandler(decimal) {
-  // deals with decimal point being input
-  console.log('decimal point: ' + decimal);
-  buffer.push(decimal);
   console.log('buffer: ' + buffer)
 }
 
@@ -41,7 +32,19 @@ function operatorHandler(operator) {
 
 function equalsHandler() {
   // deals with equals being pressed
-  console.log('equals');
+  //first convert array to string
+  var answerString = buffer.join(' ');
+  answerString = answerString.replace(/\s/g,'');
+  
+  //then evaluate to an 'answer' variable
+  var answer = eval(answerString);
+  answer = Math.round(answer * 1000) / 1000;
+  
+  // then display
+  console.log(answerString + ' = ' + answer);
+  
+  //then clear buffer
+  clearBuffer();
 }
 
 function functionHandler() {
@@ -57,4 +60,8 @@ function updateDisplay() {
   // if last entry was operator, clear display
   // if last entry was equals, display answer
   
+}
+
+function clearBuffer() {
+  buffer = [];
 }
