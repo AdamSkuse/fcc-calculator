@@ -39,6 +39,10 @@ function operatorHandler(operator) {
 function equalsHandler() {
   // deals with equals being pressed
   //first convert array to string
+    //edge case: buffer is empty (should do nothing)
+  //edge case: last entry in buffer is an operator (should do nothing)
+  if ((buffer.length > 0) && (!operatorRegex.test(buffer[buffer.length -1]))) {
+  //first convert array to string
   var answerString = buffer.join(' ');
   answerString = answerString.replace(/\s/g,'');
   
@@ -51,10 +55,7 @@ function equalsHandler() {
   
   //then clear buffer
   clearBuffer();
-  
-  //edge case: buffer is empty (should do nothing)
-  //edge case: last entry in buffer is an operator (should do nothing)
-  
+  }  
 }
 
 function functionHandler() {
@@ -67,7 +68,6 @@ function functionHandler() {
 
 function updateDisplay() {
   // if last entry was digit or decimal point, add it to display
-  
   // if last entry was operator, clear display
   // if last entry was equals, display answer
   

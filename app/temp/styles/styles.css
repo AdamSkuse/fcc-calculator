@@ -468,9 +468,22 @@ body {
 .display {
   width: 200px;
   margin: auto;
-  min-height: 50px;
   background-color: #d9f2d9;
   border-radius: 5px;
+}
+
+.display-current {
+  font-family: 'Sarpanch', sans-serif;
+  font-size: 2rem;
+  line-height: 90%;
+  text-align: right;
+}
+
+.display-buffer {
+  font-family: 'Sarpanch', sans-serif;
+  font-size: 0.7rem;
+  background-color: green;
+  text-align: right;
 }
 
 .button-row {
