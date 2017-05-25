@@ -18,6 +18,7 @@ function numberHandler(digit) {
   // deals with numbers being input
   console.log('digit: ' + digit);
   buffer.push(digit);
+  updateDisplay(digit);
   console.log('buffer: ' + buffer)
 }
 
@@ -33,6 +34,7 @@ function operatorHandler(operator) {
     buffer.push(operator);
   }
   console.log('buffer: ' + buffer)
+  updateDisplay(operator);
   
 }
 
@@ -53,6 +55,9 @@ function equalsHandler() {
   // then display
   console.log(answerString + ' = ' + answer);
   
+  clearDisplay();
+  updateDisplay(answer);
+  
   //then clear buffer
   clearBuffer();
   }  
@@ -66,11 +71,28 @@ function functionHandler() {
   console.log('function');
 }
 
-function updateDisplay() {
+function updateDisplay(input) {
   // if last entry was digit or decimal point, add it to display
-  // if last entry was operator, clear display
+  console.log('Display: ' + input);
+  
+   if (!operatorRegex.test(buffer[buffer.length -1])) {
+     // if it is the default zero on display, clear display and show new entry
+     if (buffer.length === 1 || operatorRegex.test(buffer[buffer.length -2])) {
+       $('.display-current').text(input);
+     } else {
+     $('.display-current').append(input);
+     }
+   } else {
+     // if last entry was operator, clear display and print operator
+     $('.display-current').text(input);
+     console.log('op');
+   }
   // if last entry was equals, display answer
   
+}
+
+function clearDisplay() {
+  $('.display-current').html('&nbsp;');
 }
 
 function clearBuffer() {
