@@ -1,4 +1,5 @@
-var buffer = []
+var buffer = [];
+var operatorRegex = /[/\+\*-]/;
 
 $('.button').on('click', function(){
   var input = ($(this).attr('data-key'));
@@ -22,12 +23,17 @@ function numberHandler(digit) {
 
 function operatorHandler(operator) {
   console.log('operator: ' + operator);
-  buffer.push(operator);
+  // edge case: buffer is empty
+   // edge case: last entry in buffer is another operator
+  if ((buffer.length > 0) && (!operatorRegex.test(buffer[buffer.length -1]))) {
+    // edge case: last entry in buffer is a decimal point
+    if (buffer[buffer.length -1] == ".") {
+      buffer.pop()
+    }  
+    buffer.push(operator);
+  }
   console.log('buffer: ' + buffer)
   
-  // edge case: buffer is empty
-  // edge case: last entry in buffer is a decimal point
-  // edge case: last entry in buffer is another operator
 }
 
 function equalsHandler() {
@@ -45,6 +51,10 @@ function equalsHandler() {
   
   //then clear buffer
   clearBuffer();
+  
+  //edge case: buffer is empty (should do nothing)
+  //edge case: last entry in buffer is an operator (should do nothing)
+  
 }
 
 function functionHandler() {
@@ -57,6 +67,7 @@ function functionHandler() {
 
 function updateDisplay() {
   // if last entry was digit or decimal point, add it to display
+  
   // if last entry was operator, clear display
   // if last entry was equals, display answer
   
