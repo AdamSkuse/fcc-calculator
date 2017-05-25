@@ -1,5 +1,6 @@
 var buffer = [];
 var operatorRegex = /[/\+\*-]/;
+var operatorDecimalRegex = /[/\+\*\.-]/;
 
 $('.button').on('click', function(){
   var input = ($(this).attr('data-key'));
@@ -9,9 +10,11 @@ $('.button').on('click', function(){
     operatorHandler(input);
   } else if (/[=]/.test(input)) {
     equalsHandler();
-  } else if (/(AC|C)/.test(input)) {
-    functionHandler();
-  } 
+  } else if (input==="AC") {
+    allClearHandler();
+  } else {
+    clearHandler();
+  }
 });
 
 function numberHandler(digit) {
@@ -24,10 +27,10 @@ function numberHandler(digit) {
 
 function operatorHandler(operator) {
   console.log('operator: ' + operator);
-  // edge case: buffer is empty
-   // edge case: last entry in buffer is another operator
+  // edge case: buffer is empty - done
+   // edge case: last entry in buffer is another operator - done
   if ((buffer.length > 0) && (!operatorRegex.test(buffer[buffer.length -1]))) {
-    // edge case: last entry in buffer is a decimal point
+    // edge case: last entry in buffer is a decimal point -done
     if (buffer[buffer.length -1] == ".") {
       buffer.pop()
     }  
@@ -60,21 +63,60 @@ function equalsHandler() {
   
   //then clear buffer
   clearBuffer();
+    // then push answer into buffer so further calcs can be done
+  buffer.push(answer);
   }  
 }
 
-function functionHandler() {
-  //deals with function buttons being pressed
-  //if function is AC, reset buffer and display
-  //if function is clear...delete last item from buffer?
-  
-  console.log('function');
+function allClearHandler() {
+    clearBuffer();
+    clearDisplay();
 }
+
+function clearHandler() {
+  console.log('Clear Handler'); 
+  if (buffer.length > 0) {
+    switch (operatorDecimalRegex.test(buffer[buffer.length -1])) {
+      case true: //last buffer entry is an operator or decimal point
+        buffer.pop();
+        clearDisplay();
+        console.log(buffer);
+        break;
+        
+      case false:
+            console.log(buffer);
+            var reversedBuffer = buffer.slice(0);
+            console.log('to reverse: ' + reversedBuffer);
+            reversedBuffer.reverse()
+            console.log('reversed ' + reversedBuffer);
+            var joined = reversedBuffer.join('');
+            console.log('joined ' + joined);
+            console.log('original ' + buffer);
+            var numToDelete = parseInt(joined);
+            console.log(numToDelete);
+            var deleteCount = numToDelete.toString().length;
+            console.log('digits to delete ' + deleteCount);
+            for (var i = deleteCount; i !== 0; i--) {
+              buffer.pop()
+              console.log('pop! ' + buffer);
+              clearDisplay();
+            }
+            
+            }
+    
+    
+    //CASE 2 - last buffer entry is a number
+      //pop last number from buffer (reverse buffer, convert to string, parseInt to get number, get length of that number string, use this length to delete it from stringified buffer, turn changed stringified buffer into  array, reverse, overwrite original buffer with this new buffer)
+    //then display 0 on screen
+    
+  }
+}
+
+
+      
 
 function updateDisplay(input) {
   // if last entry was digit or decimal point, add it to display
-  console.log('Display: ' + input);
-  
    if (!operatorRegex.test(buffer[buffer.length -1])) {
      // if it is the default zero on display, clear display and show new entry
      if (buffer.length === 1 || operatorRegex.test(buffer[buffer.length -2])) {
@@ -85,11 +127,9 @@ function updateDisplay(input) {
    } else {
      // if last entry was operator, clear display and print operator
      $('.display-current').text(input);
-     console.log('op');
    }
   // if last entry was equals, display answer
-  
-}
+  }
 
 function clearDisplay() {
   $('.display-current').html('&nbsp;');
