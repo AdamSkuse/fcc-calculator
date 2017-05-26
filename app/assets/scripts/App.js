@@ -22,7 +22,6 @@ function numberHandler(digit) {
   console.log('digit: ' + digit);
   buffer.push(digit);
   updateDisplay(digit);
-  updateBufferDisplay();
   console.log('buffer: ' + buffer)
 }
 
@@ -39,7 +38,6 @@ function operatorHandler(operator) {
   }
   console.log('buffer: ' + buffer)
   updateDisplay(operator);
-  updateBufferDisplay();
   
 }
 
@@ -60,22 +58,19 @@ function equalsHandler() {
   // then display
   console.log(answerString + ' = ' + answer);
   
-    // if answer is too long, display error, reset calc
-  console.log('answer to string ' + answer.toString());
-    console.log('length' + answer.toString().length);
+  clearDisplay();
+  updateDisplay(answer);
   
-      clearDisplay();
-      updateDisplay(answer);
-      clearBuffer();
-      buffer.push(answer);
+  //then clear buffer
+  clearBuffer();
+    // then push answer into buffer so further calcs can be done
+  buffer.push(answer);
   }  
 }
-
 
 function allClearHandler() {
     clearBuffer();
     clearDisplay();
-    clearBufferDisplay();
 }
 
 function clearHandler() {
@@ -85,11 +80,10 @@ function clearHandler() {
       case true: //last buffer entry is an operator or decimal point
         buffer.pop();
         clearDisplay();
-        updateBufferDisplay();
         console.log(buffer);
         break;
         
-      case false: //last buffer entry is a number
+      case false:
             console.log(buffer);
             var reversedBuffer = buffer.slice(0);
             console.log('to reverse: ' + reversedBuffer);
@@ -105,12 +99,20 @@ function clearHandler() {
             for (var i = deleteCount; i !== 0; i--) {
               buffer.pop()
               console.log('pop! ' + buffer);
-              updateBufferDisplay();
               clearDisplay();
             }
+            
             }
+    
+    
+    //CASE 2 - last buffer entry is a number
+      //pop last number from buffer (reverse buffer, convert to string, parseInt to get number, get length of that number string, use this length to delete it from stringified buffer, turn changed stringified buffer into  array, reverse, overwrite original buffer with this new buffer)
+    //then display 0 on screen
+    
   }
 }
+
+
       
 
 function updateDisplay(input) {
@@ -127,12 +129,17 @@ function updateDisplay(input) {
      // if last entry was operator, clear display and print operator
      $('.display-current').text(input);
    }
+<<<<<<< HEAD
   } else {
     displayOverflowMessage();
+=======
+  // if last entry was equals, display answer
+>>>>>>> parent of e92816d... Adds buffer display
   }
 } 
   
 
+<<<<<<< HEAD
 function updateBufferDisplay() {
   var bufferDisplay = buffer.join('')
   console.log(buffer);
@@ -140,12 +147,10 @@ function updateBufferDisplay() {
   $('.display-buffer').html('&nbsp;' + bufferDisplay);
 } 
   
+=======
+>>>>>>> parent of e92816d... Adds buffer display
 function clearDisplay() {
   $('.display-current').html('&nbsp;');
-}
-
-function clearBufferDisplay() {
-  $('.display-buffer').html('&nbsp;');
 }
 
 function clearBuffer() {
