@@ -114,6 +114,7 @@ function clearHandler() {
       
 
 function updateDisplay(input) {
+  if (!displayOverflowCheck(input)) {
   // if last entry was digit or decimal point, add it to display
    if (!operatorRegex.test(buffer[buffer.length -1])) {
      // if it is the default zero on display, clear display and show new entry
@@ -126,18 +127,18 @@ function updateDisplay(input) {
      // if last entry was operator, clear display and print operator
      $('.display-current').text(input);
    }
+  } else {
+    displayOverflowMessage();
   }
+} 
+  
 
 function updateBufferDisplay() {
   var bufferDisplay = buffer.join('')
   console.log(buffer);
   console.log(bufferDisplay);
   $('.display-buffer').html('&nbsp;' + bufferDisplay);
-}
-  
-function digitLimitMetHandler() {
-  console.log('digit limit met!');
-}  
+} 
   
 function clearDisplay() {
   $('.display-current').html('&nbsp;');
@@ -149,4 +150,23 @@ function clearBufferDisplay() {
 
 function clearBuffer() {
   buffer = [];
+}
+
+function displayOverflowCheck(input) {
+  if (operatorRegex.test(buffer[buffer.length -1])) {
+    return false;
+    } else {
+    return ($('.display-current').text().length) + (input.toString().length) >= 9;
+}
+}
+
+function displayOverflowMessage() {
+  clearDisplay();
+  clearBufferDisplay();
+  clearBuffer();
+  $('.display-current').text('Err');
+  $('.display-buffer').html('&nbsp;');
+  $('.display-buffer').text('Digit Limit Exceeded');
+  
+  
 }
