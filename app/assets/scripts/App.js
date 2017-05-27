@@ -47,7 +47,6 @@ function equalsHandler() {
   }  
 }
 
-
 function allClearHandler() {
     clearBuffer();
     clearDisplay();
@@ -62,7 +61,6 @@ function clearHandler() {
         clearDisplay();
         updateBufferDisplay();
         break;
-        
       case false: //last buffer entry is a number
             var reversedBuffer = buffer.slice(0);
             reversedBuffer.reverse()
@@ -80,7 +78,6 @@ function clearHandler() {
       
 
 function updateDisplay(input) {
-  //if current display digits + input OR input alone is greater than 9, print an error
   if (displayLimitChecker(input)) {
   // if last entry was digit or decimal point, add it to display
    if (!operatorRegex.test(buffer[buffer.length -1])) {
@@ -94,7 +91,7 @@ function updateDisplay(input) {
        $('.display-current').text(input);
    }
   }
-  }
+}
 
 function updateBufferDisplay() {
   var bufferDisplay = buffer.join('')
