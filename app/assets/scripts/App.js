@@ -19,8 +19,8 @@ $('.button').on('click', function(){
 
 function numberHandler(digit) {
   buffer.push(digit);
-  updateDisplay(digit);
   updateBufferDisplay();
+  updateDisplay(digit);
 }
 
 function operatorHandler(operator) {
@@ -114,6 +114,7 @@ function displayLimitChecker(input) {
     clearBuffer();
     clearDisplay();
     clearBufferDisplay();
+    displayError("Max digit limit reached");
     console.log('Digit limit exceeded!')
     return false;
   } else {
@@ -123,4 +124,10 @@ function displayLimitChecker(input) {
 
 function clearBuffer() {
   buffer = [];
+}
+
+function displayError(msg) {
+  $('.display-buffer').text(msg);
+  $('.display-current').text("Err");
+
 }
