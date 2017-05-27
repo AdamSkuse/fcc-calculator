@@ -450,7 +450,7 @@ template {
 }
 
 body {
-  padding-top: 30px;
+  padding-top: 100px;
   font-family: Helvetica, sans-serif;
   background-color: #994b33;
 }
@@ -508,18 +508,19 @@ body {
   text-align: center;
   margin: 5px;
   width: 20px;
+  height: 20px;
   border-bottom: 3px solid black;
 }
 
 .button-function {
   background-color: red;
-  -webkit-box-shadow: inset -1px -3px 10px 1px #515;
-          box-shadow: inset -1px -3px 10px 1px #515;
+  -webkit-box-shadow: inset -1px -1px 1px 1px #515;
+          box-shadow: inset -1px -1px 1px 1px #515;
 }
 
 .button-pressed {
-  background-color: green;
-
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 .button-equals-top {
@@ -528,8 +529,8 @@ body {
   position: relative;
 }
 
-.button-equals-bottom: {
-  background-color: green;
+.button-equals-bottom {
+  visibility: hidden;
 }
 
 .floating-symbol-equals {

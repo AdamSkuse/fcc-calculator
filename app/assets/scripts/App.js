@@ -18,6 +18,14 @@ $('.button').on('click', function(){
   }
 });
 
+$('.button').mousedown(function(){
+  $(this).addClass('button-pressed');
+});
+
+$('.button').mouseup(function(){
+  $(this).removeClass('button-pressed');
+});
+
 function numberHandler(digit) {
   buffer.push(digit);
   updateBufferDisplay();
