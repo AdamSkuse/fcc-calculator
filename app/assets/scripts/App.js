@@ -1,3 +1,4 @@
+console.log('gulp testing');
 var buffer = [];
 var operatorRegex = /[/\+\*-]/;
 var operatorDecimalRegex = /[/\+\*\.-]/;
