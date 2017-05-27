@@ -38,9 +38,9 @@ function operatorHandler(operator) {
       buffer.pop()
     }  
     buffer.push(operator);
+    updateDisplay(operator);
+    updateBufferDisplay();
   }
-  updateDisplay(operator);
-  updateBufferDisplay();
 }
 
 function equalsHandler() {
