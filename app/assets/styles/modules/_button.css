@@ -6,9 +6,9 @@
 
 .button {
   display: inline-block;
-  background-color: #333;
-  box-shadow: inset -1px -3px 10px 1px #000;
-  color: white;
+  background-color: $button-regular;
+  box-shadow: inset -1px -3px 10px 1px $button-regular-shadow;
+  color: $button-text;
   border-radius: 5px;
   padding: 10px;
   text-align: center;
@@ -20,8 +20,8 @@
 
 
 .button-function {
-  background-color: red;
-  box-shadow: inset -1px -1px 1px 1px #515;
+  background-color: $button-function;
+  box-shadow: inset -1px -1px 1px 1px $button-function-shadow;
 }
 
 .button-pressed {

@@ -1,5 +1,5 @@
 body {
   padding-top: 100px;
   font-family: Helvetica, sans-serif;
-  background-color: #994b33;
+  background-color: $pageBackground;
 }

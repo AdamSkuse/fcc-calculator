@@ -1,4 +1,5 @@
 @import "normalize.css";
+@import "base/_variables";
 @import "base/_global";
 @import "modules/_calculator-body";
 @import "modules/_display";

@@ -1,7 +1,7 @@
 .calculator-body {
   margin: auto;
   width: 215px;
-  background-color: #ccc;
+  background-color: $calculatorBody;
   text-align: center;
   padding: 10px;
   padding-top: 20px;
