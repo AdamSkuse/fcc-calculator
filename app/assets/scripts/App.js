@@ -41,9 +41,9 @@ function equalsHandler() {
     var answer = eval(answerString);
     answer = Math.round(answer * 1000) / 1000;
     clearDisplay();
-    updateDisplay(answer);
     clearBuffer();
     buffer.push(answer);
+    updateDisplay(answer);
   }  
 }
 
@@ -81,7 +81,7 @@ function clearHandler() {
 
 function updateDisplay(input) {
   //if current display digits + input OR input alone is greater than 9, print an error
-  displayLimitChecker(input);
+  if (displayLimitChecker(input)) {
   // if last entry was digit or decimal point, add it to display
    if (!operatorRegex.test(buffer[buffer.length -1])) {
      // if it is the default zero on display, or the last character in display is an operator, clear display and show new entry
@@ -93,6 +93,7 @@ function updateDisplay(input) {
    } else {
        $('.display-current').text(input);
    }
+  }
   }
 
 function updateBufferDisplay() {
@@ -110,9 +111,16 @@ function clearBufferDisplay() {
 
 function displayLimitChecker(input) {
   if (input.toString().length > 9 || input.toString().length + (document.querySelector('.display-current').childNodes.length) > 9) {
+    clearBuffer();
+    clearDisplay();
+    clearBufferDisplay();
     console.log('Digit limit exceeded!')
+    return false;
+  } else {
+    return true
   }
 }
+
 function clearBuffer() {
   buffer = [];
 }
