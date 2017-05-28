@@ -5,7 +5,9 @@ cssvars = require('postcss-simple-vars'),
 nested = require('postcss-nested'),
 cssImport = require('postcss-import'),
 watch = require('gulp-watch'),
-browserSync = require('browser-sync').create();
+browserSync = require('browser-sync').create(),
+del = require('del'),
+usemin = require('gulp-usemin');
 	
 gulp.task('default', function() {
   		console.log("default task");
@@ -47,3 +49,14 @@ gulp.task('cssInject', ['styles'], function() {
     .pipe(browserSync.stream());
 });
 
+gulp.task('deleteDistFolder', function() {
+  return del("./dist");
+});
+
+gulp.task('usemin', ['deleteDistFolder'], function() {
+  return gulp.src("./app/index.html")
+  .pipe(usemin())
+  .pipe(gulp.dest("./dist"));
+});
+
+gulp.task('build', ['deleteDistFolder', 'usemin']);

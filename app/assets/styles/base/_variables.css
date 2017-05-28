@@ -1,10 +1,19 @@
+/* Main page colors */
 $pageBackground: #994b33;
+
+/* Calculator colors */
 $calculatorBody: #ccc;
+
+/* Calculator display colors */
 $display: #d9f2d9;
 $displayBuffer: #b2d8b2;
 $displayBorder: #999;
+
+/* Buttons - regular */
 $button-regular: #333;
 $button-regular-shadow: #000;
 $button-text: #fff;
+
+/* Buttons - function */
 $button-function: #f00;
 $button-function-shadow: #515;
