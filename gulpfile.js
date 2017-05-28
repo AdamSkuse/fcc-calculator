@@ -7,7 +7,10 @@ cssImport = require('postcss-import'),
 watch = require('gulp-watch'),
 browserSync = require('browser-sync').create(),
 del = require('del'),
-usemin = require('gulp-usemin');
+usemin = require('gulp-usemin'),
+rev = require('gulp-rev'),
+cssnano = require('gulp-cssnano'),
+uglify = require('gulp-uglify');
 	
 gulp.task('default', function() {
   		console.log("default task");
@@ -55,7 +58,10 @@ gulp.task('deleteDistFolder', function() {
 
 gulp.task('usemin', ['deleteDistFolder'], function() {
   return gulp.src("./app/index.html")
-  .pipe(usemin())
+  .pipe(usemin({
+    css: [function() {return rev()}, function() {return cssnano()}],
+    js: [function() {return rev()}, function() {return uglify()}]
+  }))
   .pipe(gulp.dest("./dist"));
 });
 
