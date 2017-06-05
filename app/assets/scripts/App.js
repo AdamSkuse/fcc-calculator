@@ -1,17 +1,17 @@
 var buffer = [];
-var operatorRegex = /[/\+\*-]/;
-var operatorDecimalRegex = /[/\+\*\.-]/;
+var operatorRegex = /[÷+x-]/;
+var operatorDecimalRegex = /[÷+x\.-]/;
 var decimalEntered = false;
 
 $('.button').on('click', function(){
   var input = ($(this).attr('data-key'));
     if (/[0-9]/.test(input)) {
     numberHandler(input); 
-  } else if (/[\.]/.test(input)) {
+  } else if (/\./.test(input)) {
     decimalHandler(input);
-  } else if (/[/\+\*-]/.test(input)) {
+  } else if (/[÷+x-]/.test(input)) {
     operatorHandler(input);
-  } else if (/[=]/.test(input)) {
+  } else if (/=/.test(input)) {
     equalsHandler();
   } else if (input==="AC") {
     allClearHandler();
@@ -57,6 +57,8 @@ function equalsHandler() {
   if ((buffer.length > 0) && (!operatorRegex.test(buffer[buffer.length -1]))) {
     var answerString = buffer.join(' ');
     answerString = answerString.replace(/\s/g,'');
+    answerString = answerString.replace(/÷/g, '/');
+    answerString = answerString.replace(/x/g, '*');
     var answer = eval(answerString);
     answer = Math.round(answer * 1000) / 1000;
     clearDisplay();
