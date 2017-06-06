@@ -46,7 +46,7 @@ function operatorHandler(operator) {
     if (buffer[buffer.length -1] == ".") {
       buffer.pop()
     }  
-    buffer.push(operator);
+    buffer.push(operator);  //this and following two lines can be replaced by a numberHandler() call
     updateDisplay(operator);
     updateBufferDisplay();
     decimalEntered = false;
@@ -56,11 +56,11 @@ function operatorHandler(operator) {
 function equalsHandler() {
   if ((buffer.length > 0) && (!operatorRegex.test(buffer[buffer.length -1]))) {
     var answerString = buffer.join(' ');
-    answerString = answerString.replace(/\s/g,'');
-    answerString = answerString.replace(/÷/g, '/');
-    answerString = answerString.replace(/x/g, '*');
+    answerString = answerString.replace(/\s/g,'')
+      .replace(/÷/g, '/')
+      .replace(/x/g, '*');
     var answer = eval(answerString);
-    answer = Math.round(answer * 1000) / 1000;
+    answer = Math.round(answer * 10000) / 10000;
     clearDisplay();
     clearBuffer();
     buffer.push(answer);
